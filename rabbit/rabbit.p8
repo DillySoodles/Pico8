@@ -207,6 +207,7 @@ end
 
 ]]--
 
+
 function spawn_player()
 	add(players,{
 	x=64,
@@ -253,10 +254,33 @@ function spawn_player()
   end
   
   self.turn=(atan2(self.vy,self.vx))
+
+  if btn(5) and count(projectiles)==0 then
+    spawn_projectile(self.x,self.y, self.turn, 10)
+  end
  end})
  
 end
 
+function spawn_projectile(x,y, rotation, color)
+    add(projectiles, {
+        x=x,
+        y=y,
+        vx=4*sin(rotation),
+        vy=4*cos(rotation),
+        color=color,
+        draw= function(self)
+        line(self.x, self.y, self.x+self.vx, self.y+self.vy,self.color)
+
+        end,
+        update= function(self)
+        self.x+=self.vx
+        self.y+=self.vy
+        if (dist(self,p1)>90) del(projectiles, self)
+        end
+
+    })
+end
 
 
 function spawn_asteroid()
@@ -395,6 +419,7 @@ function _init()
  planets={}
  players={}
  asteroids={}
+ projectiles={}
   
  --parameters
 
@@ -466,6 +491,10 @@ function _update60()
   d:update()
  end
 
+ for projectile in all(projectiles) do
+    projectile:update()
+ end
+
 --foreach(game_objs, function(obj) obj:draw() end)
 
  --camera
@@ -498,6 +527,10 @@ function _draw()
   d:draw()
  end
 
+
+ for projectile in all(projectiles) do
+    projectile:draw()
+ end
 
  
  --player

@@ -167,11 +167,18 @@ end
 
 
 -->8
+
+function make_stars()
+
+
+end
+
 function make_bg()
+    
 	--floor
-	rectfill(-100,-10,400,300,6)
+	rectfill(-150,-10,400,300,6)
 	--sky
-	rectfill(-100,-10,400,-100,1)
+	rectfill(-150,-10,400,-99,1)
 	
 	
 	
@@ -179,10 +186,14 @@ function make_bg()
 	oval(-40,20,-10,30,5)
 	
 	--crater inside
+    
 	ovalfill(-40,18,-10,26,0)
+    
 	
-		--crescent
+	--crescent
+    fillp(0b1001000100100100)
 	ovalfill(-39,23,-11,28,6)
+    fillp()
 	
 	--lines
 	line(-40,25,-42,30,5)

@@ -121,6 +121,7 @@ end
 axes={
 x=function (a,b) return a.x<b.x end,
 y=function (a,b) return a.y<b.y end}
+
 -- a: array to be sorted in-place
 -- c: comparator (optional, defaults to ascending)
 -- l: first index to be sorted (optional, defaults to 1)
